@@ -85,7 +85,10 @@ public class GoogleFitModule extends ReactContextBaseJavaModule implements Lifec
         }
 
         if (mGoogleFitManager.isAuthorized()) {
-            return "is-authorized";
+            Log.i(REACT_MODULE, "In authorize already authorized");
+            return;
+        } else {
+            Log.i(REACT_MODULE, "In authorize already NOT authorized");
         }
 
         ReadableArray scopes = options.getArray("scopes");

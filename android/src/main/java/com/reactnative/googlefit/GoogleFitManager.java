@@ -206,6 +206,9 @@ public class GoogleFitManager implements
     }
 
     public boolean isAuthorized() {
+        Log.i(TAG, "inside isAuthorized:");
+        Log.i(TAG, mApiClient != null);
+
         if (mApiClient != null && mApiClient.isConnected()) {
             return true;
         } else {
