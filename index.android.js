@@ -44,10 +44,12 @@ class RNGoogleFit {
           Scopes.FITNESS_LOCATION_READ,
         ]
 
-        googleFit.authorize({
-          scopes: (options && options.scopes) || defaultScopes,
+        googleFit.authorize(
+          {
+            scopes: (options && options.scopes) || defaultScopes
+          }, 
           initializeOnly
-        })
+        )
       })
       return authResult
     } catch (error) {
