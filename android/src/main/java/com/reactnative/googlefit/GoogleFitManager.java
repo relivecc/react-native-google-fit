@@ -129,7 +129,7 @@ public class GoogleFitManager implements
 
     public SleepHistory getSleepHistory() { return sleepHistory; }
 
-    public void authorize(ArrayList<String> userScopes) {
+    public void authorize(ArrayList<String> userScopes, boolean initializeOnly) {
         final ReactContext mReactContext = this.mReactContext;
 
         GoogleApiClient.Builder apiClientBuilder = new GoogleApiClient.Builder(mReactContext.getApplicationContext())
@@ -187,7 +187,9 @@ public class GoogleFitManager implements
                 )
                 .build();
 
-        mApiClient.connect();
+        if(initializeOnly == false) {
+            mApiClient.connect();
+        }
     }
 
     public void  disconnect(Context context) {
@@ -204,6 +206,14 @@ public class GoogleFitManager implements
     }
 
     public boolean isAuthorized() {
+        Log.i(TAG, "inside isAuthorized:");
+
+        if(mApiClient != null) {
+            Log.i(TAG, "mApiClient is not null");
+        } else {
+            Log.i(TAG, "mApiClient is null");
+        }
+
         if (mApiClient != null && mApiClient.isConnected()) {
             return true;
         } else {
@@ -222,7 +232,6 @@ public class GoogleFitManager implements
                     }
                 });
     }
-
 
     private void sendEvent(ReactContext reactContext,
                            String eventName,

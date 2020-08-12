@@ -77,7 +77,7 @@ public class GoogleFitModule extends ReactContextBaseJavaModule implements Lifec
     }
 
     @ReactMethod
-    public void authorize(ReadableMap options) {
+    public void authorize(ReadableMap options, boolean initializeOnly) {
         final Activity activity = getCurrentActivity();
 
         if (mGoogleFitManager == null) {
@@ -85,7 +85,10 @@ public class GoogleFitModule extends ReactContextBaseJavaModule implements Lifec
         }
 
         if (mGoogleFitManager.isAuthorized()) {
+            Log.i(REACT_MODULE, "In authorize already authorized");
             return;
+        } else {
+            Log.i(REACT_MODULE, "In authorize already NOT authorized");
         }
 
         ReadableArray scopes = options.getArray("scopes");
@@ -95,7 +98,7 @@ public class GoogleFitModule extends ReactContextBaseJavaModule implements Lifec
             scopesList.add(type.toString());
         }
 
-        mGoogleFitManager.authorize(scopesList);
+        mGoogleFitManager.authorize(scopesList, initializeOnly);
     }
 
     @ReactMethod
