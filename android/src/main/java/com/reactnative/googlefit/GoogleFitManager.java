@@ -207,7 +207,12 @@ public class GoogleFitManager implements
 
     public boolean isAuthorized() {
         Log.i(TAG, "inside isAuthorized:");
-        Log.i(TAG, mApiClient != null);
+
+        if(mApiClient != null) {
+            Log.i(TAG, "mApiClient is not null");
+        } else {
+            Log.i(TAG, "mApiClient is null");
+        }
 
         if (mApiClient != null && mApiClient.isConnected()) {
             return true;
@@ -227,7 +232,6 @@ public class GoogleFitManager implements
                     }
                 });
     }
-
 
     private void sendEvent(ReactContext reactContext,
                            String eventName,
